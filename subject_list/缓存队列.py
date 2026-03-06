@@ -72,9 +72,28 @@ class Solution:
 
 if __name__ == '__main__':
     s = Solution()
-    buffer_cap = 5
-    operations = [[1, 35, 2, 100], [1, 0, 40, 255], [1, 11, 10, 81], [1, 16, 12, 173], [2, 16, 3, 0], [2, 0, 3, 0]]
-    data = "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-    res = s.memory_with_write_buffer(buffer_cap, operations, data)
-    print(res)
-    print(res == "FFFFFFFFFFFFFFFFFFFFFF5151515151ADADADADADADADADFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")
+    # buffer_cap = 5
+    # operations = [[1, 35, 2, 100], [1, 0, 40, 255], [1, 11, 10, 81], [1, 16, 12, 173], [2, 16, 3, 0], [2, 0, 3, 0]]
+    # data = "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    # res = s.memory_with_write_buffer(buffer_cap, operations, data)
+    # print(res)
+    # print(res == "FFFFFFFFFFFFFFFFFFFFFF5151515151ADADADADADADADADFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")
+    
+    # 构造大的输入
+    import time
+    import random
+    buffer_cap_large = 1000
+    operations_large = []
+    for i in range(1000):
+        op = random.choice([1, 2, 3])
+        offset = random.randint(0, 4899)
+        length = random.randint(1, 100)
+        content = random.randint(0, 255)
+        operations_large.append([op, offset, length, content])
+    print(f'{len(operations_large)} operations generated for large input.')
+    data_large = "0" * 10000
+    time_start = time.time()
+    res_large = s.memory_with_write_buffer(buffer_cap_large, operations_large, data_large)
+    print("Large input result length:", len(res_large))
+    print("Large input result (first 100 chars):", res_large[:100])
+    print("Time taken for memory operations:", time.time() - time_start)
