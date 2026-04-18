@@ -11,11 +11,6 @@ def calculate_total_task_time(task_flow):
     # 2. 任务建模：初始化每个任务的核心信息
     task_info = []
     for idx, (task_type, pre_idx) in enumerate(task_flow):
-        # 合法性校验
-        if task_type not in task_to_channel:
-            raise ValueError(f"任务索引{idx}的类型{task_type}无效，仅支持A/B/C/D/F")
-        if pre_idx != -1 and (pre_idx < 0 or pre_idx >= len(task_flow)):
-            raise ValueError(f"任务索引{idx}的前置索引{pre_idx}无效，范围需为0~{len(task_flow)-1}")
         
         task_info.append({
             'idx': idx,                # 任务流索引
